@@ -1,6 +1,5 @@
-BootStrap: debootstrap
-OSVersion: xenial
-MirrorURL: http://us.archive.ubuntu.com/ubuntu/
+BootStrap: docker
+From: ubuntu:xenial
 
 %environment
 	export PATH=/mrtrix3/bin:$PATH
