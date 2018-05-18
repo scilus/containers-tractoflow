@@ -25,35 +25,35 @@ From: ubuntu:xenial
 	apt-get update && apt-get -y upgrade
 	apt-get -y  install wget
 	wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | tee /etc/apt/sources.list.d/neurodebian.sources.list
-	apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9
+	apt-key adv --recv-keys --keyserver pool.sks-keyservers.net 2649A5A9 || { wget -q -O- http://neuro.debian.net/_static/neuro.debian.net.asc | apt-key add -; }
 	apt-get update
-	apt-get -y  install cmake
-	apt-get -y  install git
-	apt-get -y  install build-essential
-	apt-get -y  install zlib1g-dev
-	apt-get -y  install python-pip
-	apt-get -y  install python-dev python-scipy python-numpy
-	apt-get -y  install g++
-	apt-get -y  install gcc
-	apt-get -y  install python
-	apt-get -y  install libeigen3-dev
-	apt-get -y  install libqt4-opengl-dev
-	apt-get -y  install libgl1-mesa-dev
-	apt-get -y  install libfftw3-dev
-	apt-get -y  install libtiff5-dev
-	apt-get -y  install clang
-	apt-get -y  install fsl-5.0
-	apt-get -y  install fsl-5.0-eddy-nonfree
-	apt-get -y  install libgsl0-dev
-	apt-get -y  install python-tk
-	apt-get -y  install ants
+	apt-get -y install cmake
+	apt-get -y install git
+	apt-get -y install build-essential
+	apt-get -y install zlib1g-dev
+	apt-get -y install python-pip
+	apt-get -y install python-dev python-scipy python-numpy
+	apt-get -y install g++
+	apt-get -y install gcc
+	apt-get -y install python
+	apt-get -y install libeigen3-dev
+	apt-get -y install libqt4-opengl-dev
+	apt-get -y install libgl1-mesa-dev
+	apt-get -y install libfftw3-dev
+	apt-get -y install libtiff5-dev
+	apt-get -y install clang
+	apt-get -y install fsl-5.0
+	apt-get -y install fsl-5.0-eddy-nonfree
+	apt-get -y install libgsl0-dev
+	apt-get -y install python-tk
+	apt-get -y install ants
 	pip install h5py
 	pip install setuptools
 	pip install http://github.com/MarcCote/tractconverter/archive/master.zip
 
 	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.9/centos6/eddy_openmp
 	chmod +x eddy_openmp
-	cp eddy_openmp /usr/share/fsl/5.0/bin/eddy_openmp
+	mv eddy_openmp /usr/share/fsl/5.0/bin/eddy_openmp
 
 	cd /
 	git clone https://github.com/MRtrix3/mrtrix3.git
@@ -67,5 +67,6 @@ From: ubuntu:xenial
 	pip install -r requirements.txt
 	python setup.py build_all
 
+	rm /scilpy.tar
 	sed -i '38s/.*/backend : Agg/' /usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/matplotlibrc
 
