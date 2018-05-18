@@ -1,4 +1,4 @@
-Human pipeline
+Singularity related files for Human-NF
 --------------------------
 
 The image for singularity can be built using _singularity/Singularity.def_ with the command:
