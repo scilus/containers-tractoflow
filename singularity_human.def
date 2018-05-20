@@ -67,6 +67,5 @@ From: ubuntu:xenial
 	pip install -r requirements.txt
 	python setup.py build_all
 
-	rm /scilpy.tar
 	sed -i '38s/.*/backend : Agg/' /usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/matplotlibrc
 
