@@ -9,4 +9,12 @@ It can be used to run the Human-NF pipeline with the option
 
 To build the singularity, please run the command from the directory `singularity-human`.
 Otherwise, `scilpy.tar` is not found.
+
+If you use this singularity, please cite:
+
+```
+Kurtzer GM, Sochat V, Bauer MW (2017)
+Singularity: Scientific containers for mobility of compute.
+PLoS ONE 12(5): e0177459. https://doi.org/10.1371/journal.pone.0177459
+```
  
