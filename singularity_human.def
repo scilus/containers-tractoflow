@@ -15,6 +15,7 @@ From: ubuntu:xenial
 	export OPENBLAS_NUM_THREADS=1
 	export ANTSPATH=/usr/lib/ants
 	export PATH=$PATH:$ANTSPATH
+	export MATPLOTLIBRC="/usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/"
 
 %setup
 	mkdir $SINGULARITY_ROOTFS/scilpy
