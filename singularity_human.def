@@ -16,6 +16,7 @@ From: ubuntu:xenial
 	export ANTSPATH=/usr/lib/ants
 	export PATH=$PATH:$ANTSPATH
 	export MATPLOTLIBRC="/usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/"
+	export LC_ALL=C
 
 %setup
 	mkdir $SINGULARITY_ROOTFS/scilpy
@@ -33,7 +34,7 @@ From: ubuntu:xenial
 	apt-get -y install build-essential
 	apt-get -y install zlib1g-dev
 	apt-get -y install python-pip
-	apt-get -y install python-dev python-scipy python-numpy
+	apt-get -y install python-dev
 	apt-get -y install g++
 	apt-get -y install gcc
 	apt-get -y install python
@@ -43,13 +44,13 @@ From: ubuntu:xenial
 	apt-get -y install libfftw3-dev
 	apt-get -y install libtiff5-dev
 	apt-get -y install clang
-	apt-get -y install fsl-5.0
-	apt-get -y install fsl-5.0-eddy-nonfree
+	apt-get -y install fsl-5.0=5.0.9-4~nd16.04+1
+	apt-get -y install fsl-5.0-eddy-nonfree=5.0.9-1~nd16.04+1
 	apt-get -y install libgsl0-dev
 	apt-get -y install python-tk
-	apt-get -y install ants
-	pip install h5py
-	pip install setuptools
+	apt-get -y install ants=2.2.0-1~nd16.04+1
+	pip install h5py==2.6.0
+	pip install setuptools==38.5.1
 	pip install http://github.com/MarcCote/tractconverter/archive/master.zip
 
 	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.9/centos6/eddy_openmp
