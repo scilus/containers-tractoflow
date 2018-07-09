@@ -19,8 +19,10 @@ From: ubuntu:xenial
 	export LC_ALL=C
 
 %setup
+	export SCILPY=scilpy_master_007b604.tar.bz2
+
 	mkdir $SINGULARITY_ROOTFS/scilpy
-	tar -xf scilpy.tar -C $SINGULARITY_ROOTFS/scilpy
+	tar -jxf scilpy_master_007b604.tar.bz2 -C $SINGULARITY_ROOTFS/scilpy
 
 %post
 	sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
