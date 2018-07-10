@@ -28,12 +28,6 @@ From: ubuntu:xenial
 	sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
 	apt-get update && apt-get -y upgrade
 	apt-get -y  install wget
-
-	wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
-	dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
-	apt-get update
-	apt-get -y install cuda-runtime-8-0
-
 	wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | tee /etc/apt/sources.list.d/neurodebian.sources.list
 	apt-key adv --recv-keys --keyserver pool.sks-keyservers.net 2649A5A9 || { wget -q -O- http://neuro.debian.net/_static/neuro.debian.net.asc | apt-key add -; }
 	apt-get update
