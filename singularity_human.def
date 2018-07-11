@@ -55,7 +55,7 @@ From: ubuntu:xenial
 	pip install setuptools==38.5.1
 	pip install http://github.com/MarcCote/tractconverter/archive/master.zip
 
-	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.9/centos6/eddy_openmp
+	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.11/centos6/eddy_openmp
 	chmod +x eddy_openmp
 	mv eddy_openmp /usr/share/fsl/5.0/bin/eddy_openmp
 
