@@ -55,9 +55,18 @@ From: ubuntu:xenial
 	pip install setuptools==38.5.1
 	pip install http://github.com/MarcCote/tractconverter/archive/master.zip
 
-	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.9/centos6/eddy_openmp
+	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.11/centos6/eddy_openmp
 	chmod +x eddy_openmp
 	mv eddy_openmp /usr/share/fsl/5.0/bin/eddy_openmp
+
+	wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+	dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+	apt-get update
+	apt-get -y install cuda-runtime-8-0
+
+	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.11/centos6/eddy_cuda8.0
+	chmod +x eddy_cuda8.0
+	mv eddy_cuda8.0 /usr/share/fsl/5.0/bin/eddy_cuda
 
 	cd /
 	git clone https://github.com/MRtrix3/mrtrix3.git
