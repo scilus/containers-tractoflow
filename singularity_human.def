@@ -19,7 +19,7 @@ From: ubuntu:xenial
 	export LC_ALL=C
 
 %setup
-	export SCILPY=scilpy_master_007b604.tar.bz2
+	export SCILPY=scilpy_master_640c789.tar.bz2
 
 	mkdir $SINGULARITY_ROOTFS/scilpy
 	tar -jxf $SCILPY -C $SINGULARITY_ROOTFS/scilpy
