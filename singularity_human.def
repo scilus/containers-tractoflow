@@ -90,6 +90,7 @@ From: ubuntu:xenial
 	python setup.py build_all
 
 	# Doing them here since Amico depends on Dipy.
+	# TODO need to fix the version
 	pip install --index-url https://test.pypi.org/simple/ spams
 	pip install https://github.com/daducci/AMICO/archive/master.zip
 
