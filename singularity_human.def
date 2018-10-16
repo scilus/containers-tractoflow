@@ -71,13 +71,13 @@ From: ubuntu:xenial
 	chmod +x eddy_cuda8.0
 	mv eddy_cuda8.0 /usr/share/fsl/5.0/bin/eddy_cuda
 
-	cd /
-	git clone https://github.com/MRtrix3/mrtrix3.git
-	cd mrtrix3
-	git fetch --tags
-	git checkout tags/3.0_RC3 -b 3.0_RC3
-	./configure
-	./build
+	#cd /
+	#git clone https://github.com/MRtrix3/mrtrix3.git
+	#cd mrtrix3
+	#git fetch --tags
+	#git checkout tags/3.0_RC3 -b 3.0_RC3
+	#./configure
+	#./build
 
 	cd /
 	git clone https://github.com/GuillaumeTh/dipy.git
@@ -88,6 +88,10 @@ From: ubuntu:xenial
 	
 	cd /scilpy
 	python setup.py build_all
+
+	# Doing them here since Amico depends on Dipy.
+	pip install --index-url https://test.pypi.org/simple/ spams
+	pip install https://github.com/daducci/AMICO/archive/master.zip
 
 	sed -i '38s/.*/backend : Agg/' /usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/matplotlibrc
 
