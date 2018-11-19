@@ -8,7 +8,6 @@ From: ubuntu:xenial
 	PATH=${FSLDIR}/bin:${PATH}
 	export FSLDIR PATH
 	export PYTHONPATH=/scilpy:$PYTHONPATH
-	export PYTHONPATH=/dipy:$PYTHONPATH
 	export PATH=/scilpy/scripts:$PATH
 	export PATH=/scilpy/surgery_scripts:$PATH
 	export PATH=/scilpy/dev_scripts:$PATH
@@ -20,7 +19,7 @@ From: ubuntu:xenial
 	export LC_ALL=C
 
 %setup
-	export SCILPY=scilpy_master_dbba2c4.tar.bz2
+	export SCILPY=scilpy_master_0d4e8e0.tar.bz2
 
 	mkdir $SINGULARITY_ROOTFS/scilpy
 	tar -jxf $SCILPY -C $SINGULARITY_ROOTFS/scilpy
@@ -47,6 +46,7 @@ From: ubuntu:xenial
 	apt-get -y install libfftw3-dev
 	apt-get -y install libtiff5-dev
 	apt-get -y install clang
+  apt-get -y install libblas-dev liblapack-dev
 	apt-get -y install fsl-5.0=5.0.9-4~nd16.04+1
 	apt-get -y install fsl-5.0-eddy-nonfree=5.0.9-1~nd16.04+1
 	apt-get -y install libgsl0-dev
@@ -54,8 +54,8 @@ From: ubuntu:xenial
 	apt-get -y install ants=2.2.0-1~nd16.04+1
 	pip install h5py==2.6.0
 	pip install setuptools==38.5.1
-	pip install http://github.com/MarcCote/tractconverter/archive/master.zip
 	pip install -r /scilpy/requirements.txt
+	pip install -r /scilpy/requirements-git.txt
 	pip install nibabel==2.3.0
 
 	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.11/centos6/eddy_openmp
@@ -79,15 +79,12 @@ From: ubuntu:xenial
 	./configure
 	./build
 
-	cd /
-	git clone https://github.com/GuillaumeTh/dipy.git
-	cd dipy
-	git fetch --tags
-	git checkout tags/repro_proj -b fixed_seed_and_relative_threshold
-	python setup.py build_ext --inplace
-	
 	cd /scilpy
 	python setup.py build_all
+
+	# Doing them here since Amico depends on Dipy.
+	pip install --index-url https://test.pypi.org/simple/ spams==2.6.1.11
+	pip install https://github.com/daducci/AMICO/archive/0d27619.zip
 
 	sed -i '38s/.*/backend : Agg/' /usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/matplotlibrc
 
