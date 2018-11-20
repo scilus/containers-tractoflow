@@ -20,9 +20,13 @@ From: ubuntu:xenial
 
 %setup
 	export SCILPY=scilpy_master_0d4e8e0.tar.bz2
+	export HUMAN_DATA=human-data_master_1d3abfb.tar.bz2
 
 	mkdir $SINGULARITY_ROOTFS/scilpy
 	tar -jxf $SCILPY -C $SINGULARITY_ROOTFS/scilpy
+
+	mkdir $SINGULARITY_ROOTFS/human-data
+	tar -jxf $HUMAN_DATA -C $SINGULARITY_ROOTFS/human-data
 
 %post
 	sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
