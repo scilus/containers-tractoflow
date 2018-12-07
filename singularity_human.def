@@ -7,7 +7,7 @@ From: ubuntu:xenial
 	. ${FSLDIR}/etc/fslconf/fsl.sh
 	PATH=${FSLDIR}/bin:${PATH}
 	export FSLDIR PATH
-	export PYTHONPATH=/scilpy:$PYTHONPATH
+	export PYTHONPATH=/scilpy
 	export PATH=/scilpy/scripts:$PATH
 	export PATH=/scilpy/surgery_scripts:$PATH
 	export PATH=/scilpy/dev_scripts:$PATH
