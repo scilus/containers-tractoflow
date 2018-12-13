@@ -60,7 +60,7 @@ From: ubuntu:xenial
 	apt-get -y install libfftw3-dev
 	apt-get -y install libtiff5-dev
 	apt-get -y install clang
-    apt-get -y install libblas-dev liblapack-dev
+	apt-get -y install libblas-dev liblapack-dev
 	apt-get -y install fsl-5.0=5.0.9-4~nd16.04+1
 	apt-get -y install fsl-5.0-eddy-nonfree=5.0.9-1~nd16.04+1
 	apt-get -y install libgsl0-dev
