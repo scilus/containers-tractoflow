@@ -13,7 +13,7 @@ From: ubuntu:xenial
 	export PATH=/scilpy/dev_scripts:$PATH
 	export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=8
 	export OPENBLAS_NUM_THREADS=1
-	export ANTSPATH=/usr/lib/ants
+	export ANTSPATH=/ants_build/bin
 	export PATH=$PATH:$ANTSPATH
 	export MATPLOTLIBRC="/usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/"
 	export LC_ALL=C
@@ -35,7 +35,6 @@ From: ubuntu:xenial
 	wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | tee /etc/apt/sources.list.d/neurodebian.sources.list
 	apt-key adv --recv-keys --keyserver pool.sks-keyservers.net 2649A5A9 || { wget -q -O- http://neuro.debian.net/_static/neuro.debian.net.asc | apt-key add -; }
 	apt-get update
-	apt-get -y install cmake
 	apt-get -y install git
 	apt-get -y install build-essential
 	apt-get -y install zlib1g-dev
@@ -43,6 +42,17 @@ From: ubuntu:xenial
 	apt-get -y install python-dev
 	apt-get -y install g++
 	apt-get -y install gcc
+
+	cd /
+	wget https://github.com/Kitware/CMake/releases/download/v3.13.2/cmake-3.13.2.tar.gz
+	tar -xvzf cmake-3.13.2.tar.gz
+	rm -rf cmake-3.13.2.tar.gz
+	cd cmake-3.13.2
+	./bootstrap
+	make -j 8
+	make install
+	cd /
+
 	apt-get -y install python
 	apt-get -y install libeigen3-dev
 	apt-get -y install libqt4-opengl-dev
@@ -50,12 +60,11 @@ From: ubuntu:xenial
 	apt-get -y install libfftw3-dev
 	apt-get -y install libtiff5-dev
 	apt-get -y install clang
-  apt-get -y install libblas-dev liblapack-dev
+    apt-get -y install libblas-dev liblapack-dev
 	apt-get -y install fsl-5.0=5.0.9-4~nd16.04+1
 	apt-get -y install fsl-5.0-eddy-nonfree=5.0.9-1~nd16.04+1
 	apt-get -y install libgsl0-dev
 	apt-get -y install python-tk
-	apt-get -y install ants=2.2.0-1~nd16.04+1
 	pip install h5py==2.6.0
 	pip install setuptools==38.5.1
 	pip install -r /scilpy/requirements.txt
@@ -74,6 +83,17 @@ From: ubuntu:xenial
 	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.11/centos6/eddy_cuda8.0
 	chmod +x eddy_cuda8.0
 	mv eddy_cuda8.0 /usr/share/fsl/5.0/bin/eddy_cuda
+
+	cd /
+	mkdir ants_build
+	git clone https://github.com/ANTsX/ANTs.git
+	cd ANTs
+	git fetch --tags
+	git checkout tags/v2.3.1 -b v2.3.1
+	cd ../ants_build
+	cmake ../ANTs
+	make -j 8
+	cp ../ANTs/Scripts/*.sh bin/
 
 	cd /
 	git clone https://github.com/MRtrix3/mrtrix3.git
