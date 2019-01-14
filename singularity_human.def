@@ -19,7 +19,7 @@ From: ubuntu:xenial
 	export LC_ALL=C
 
 %setup
-	export SCILPY=scilpy_master_73412b6b.tar.bz2
+	export SCILPY=scilpy_master_d767f85.tar.bz2
 	export HUMAN_DATA=human-data_master_1d3abfb.tar.bz2
 
 	mkdir $SINGULARITY_ROOTFS/scilpy
