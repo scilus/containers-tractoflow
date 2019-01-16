@@ -19,7 +19,7 @@ From: ubuntu:xenial
 	export LC_ALL=C
 
 %setup
-	export SCILPY=scilpy_master_73412b6b.tar.bz2
+	export SCILPY=scilpy_master_d767f85.tar.bz2
 	export HUMAN_DATA=human-data_master_1d3abfb.tar.bz2
 
 	mkdir $SINGULARITY_ROOTFS/scilpy
@@ -63,7 +63,6 @@ From: ubuntu:xenial
 	apt-get -y install libblas-dev liblapack-dev
 	apt-get -y install fsl-5.0=5.0.9-5~nd16.04+1
 	apt-get -y install fsl-5.0-eddy-nonfree=5.0.9-1~nd16.04+1
-	apt-get -y install libgsl0-dev
 	apt-get -y install python-tk
 	pip install h5py==2.6.0
 	pip install setuptools==38.5.1
