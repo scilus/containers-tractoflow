@@ -1,10 +1,10 @@
-Singularity related files for Human-NF
---------------------------------------
+Singularity related files for TractoFlow
+----------------------------------------
 
 The image for singularity can be built using `singularity_human.def` with the command:
 `sudo singularity build image_name.img singularity_human.def`.
 
-It can be used to run the Human-NF pipeline with the option
+It can be used to run the TractoFlow pipeline with the option
 `-with-singularity image_name.img` of Nextflow.
 
 When updating `Scilpy`, you will need to modify the SHA of the file, as well as
