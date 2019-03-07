@@ -47,7 +47,7 @@ Application. Contributor must respect all terms and conditions of this Agreement
 
 Using or contributing the Application, (i) you may not copy the Application for private Modifications;
 (ii) you might not use the application for commercial purposes ("Commercial Use");
-(iii) you must contact the SCIL for a patent using of the Application.
+(iii) you must contact the SCIL for a patent based on or using the Application.
 
 2.3 Commercial Use
 
