@@ -1,16 +1,16 @@
 Singularity related files for TractoFlow
 ----------------------------------------
 
-The image for singularity can be built using `singularity_human.def` with the command:
-`sudo singularity build image_name.img singularity_human.def`.
+The image for singularity can be built using `singularity_tractoflow.def` with the command:
+`sudo singularity build image_name.img singularity_tractoflow.def`.
 
 It can be used to run the TractoFlow pipeline with the option
 `-with-singularity image_name.img` of Nextflow.
 
 When updating `Scilpy`, you will need to modify the SHA of the file, as well as
-the `SCILPY` variable in `singularity_human.def`.
+the `SCILPY` variable in `singularity_tractoflow.def`.
 
-To build the singularity, please run the command from the directory `singularity-human`.
+To build the singularity, please run the command from the directory `singularity-tractoflow`.
 Otherwise, `Scilpy` archive will not be found.
 
 If you use this singularity, please cite:
