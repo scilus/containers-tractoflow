@@ -94,9 +94,9 @@ From: ubuntu:xenial
 	./build
 
 	cd /
-	wget https://github.com/scilus/scilpy/archive/8c92d55.zip
-	unzip 8c92d55.zip
-	mv scilpy-8c92d55 scilpy
+	wget https://github.com/scilus/scilpy/archive/125b6b9.zip
+	unzip 125b6b9.zip
+	mv scilpy-125b6b9 scilpy
 	cd /scilpy
 	pip install -r requirements.txt
 	python setup.py install
