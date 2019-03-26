@@ -106,5 +106,5 @@ From: ubuntu:xenial
 	pip install --index-url https://test.pypi.org/simple/ spams==2.6.1.11
 	pip install https://github.com/daducci/AMICO/archive/0d27619.zip
 
-	sed -i '38s/.*/backend : Agg/' /usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/matplotlibrc
+	sed -i '41s/.*/backend : Agg/' /usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/matplotlibrc
 
