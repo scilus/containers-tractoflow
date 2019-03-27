@@ -104,7 +104,7 @@ From: ubuntu:xenial
 
 	# Doing them here since Amico depends on Dipy.
 	pip install --index-url https://test.pypi.org/simple/ spams==2.6.1.11
-	pip install https://github.com/daducci/AMICO/archive/0d27619.zip
+	pip install https://github.com/jchoude/AMICO/archive/NF_better_fw_correction.zip
 
 	sed -i '41s/.*/backend : Agg/' /usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/matplotlibrc
 
