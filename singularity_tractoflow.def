@@ -60,7 +60,7 @@ From: ubuntu:xenial
 	pip install h5py==2.6.0
 	pip install setuptools==38.5.1
 	pip install nibabel==2.3.0
-	pip install pybids=0.7.1
+	pip install pybids=0.9.1
 
 	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.11/centos6/eddy_openmp
 	chmod +x eddy_openmp
