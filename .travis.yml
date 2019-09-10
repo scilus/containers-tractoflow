@@ -1,0 +1,19 @@
+dist: xenial
+
+sudo: true
+
+before_install:
+  - sudo wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
+  - sudo apt-key adv --recv-keys --keyserver pool.sks-keyservers.net 2649A5A9 || { sudo wget -q -O- http://neuro.debian.net/_static/neuro.debian.net.asc | sudo apt-key add -; }
+  - sudo apt-get update
+  - sudo apt-get install -y singularity-container
+  - wget https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64
+  - mv gdrive-linux-x64 gdrive
+  - chmod +x gdrive
+  - mkdir gdrive-config
+  - echo $GOOGLE_KEY > gdrive-config/token_v2.json
+
+script:
+  - travis_wait 60 sudo singularity build singularity_tractoflow.img singularity_tractoflow.def
+  - singularity exec singularity_tractoflow.img echo "Singularity test"
+  - travis_wait 30 ./gdrive update -c gdrive-config $SINGULARITY_ID singularity_tractoflow.img --name singularity_tractoflow_${TRAVIS_COMMIT}.img
