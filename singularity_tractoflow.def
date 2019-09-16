@@ -15,12 +15,14 @@ From: scilus/singularity-base-tractoflow:latest
 	export LC_ALL="en_US.utf8"
 	export LANG="en_US.utf8"
 	export LANGUAGE="en_US.utf8"
-	apt-get update
-	apt-get -y install python3-pip
-	apt-get -y install python3-dev
-	apt-get -y install unzip
-	apt-get -y install python3
-	apt-get -y install python3-tk
+	rm -rf /var/lib/apt/lists/*
+	rm -rf /var/cache/apt/*.bin
+	apt update
+	apt -y install python3-pip
+	apt -y install python3-dev
+	apt -y install unzip
+	apt -y install python3
+	apt -y install python3-tk
 
 	cd /
 	wget https://github.com/scilus/scilpy/archive/4e24fe5.zip
