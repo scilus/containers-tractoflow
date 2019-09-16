@@ -36,6 +36,6 @@ From: scilus/singularity-base-tractoflow:latest
 
 	# Doing them here since Amico depends on Dipy.
 	pip3 install --index-url https://test.pypi.org/simple/ spams==2.6.1.11
-	pip3 install https://github.com/jchoude/AMICO/archive/NF_better_fw_correction.zip
+	pip3 install https://github.com/daducci/AMICO/archive/d345bba.zip
 
 	sed -i '41s/.*/backend : Agg/' /usr/local/lib/python3.5/dist-packages/matplotlib/mpl-data/matplotlibrc
