@@ -1,18 +1,8 @@
 BootStrap: docker
-From: ubuntu:xenial
+From: scilus/singularity-base-tractoflow:latest
 
 %environment
-	export PATH=/mrtrix3/bin:$PATH
-	FSLDIR=/usr/share/fsl/5.0
-	. ${FSLDIR}/etc/fslconf/fsl.sh
-	PATH=${FSLDIR}/bin:${PATH}
-	export FSLDIR PATH
-	export ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=8
-	export OPENBLAS_NUM_THREADS=1
-	export ANTSPATH=/ants_build/bin
-	export PATH=$PATH:$ANTSPATH
-	export MATPLOTLIBRC="/usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/"
-	export LC_ALL=C
+	export MATPLOTLIBRC="/usr/local/lib/python3.5/dist-packages/matplotlib/mpl-data/"
 
 %setup
 	export HUMAN_DATA=human-data_master_1d3abfb.tar.bz2
@@ -21,92 +11,31 @@ From: ubuntu:xenial
 	tar -jxf $HUMAN_DATA -C $SINGULARITY_ROOTFS/human-data
 
 %post
-	sed -i 's/main/main restricted universe/g' /etc/apt/sources.list
-	apt-get update && apt-get -y upgrade
-	apt-get -y  install wget
-	wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | tee /etc/apt/sources.list.d/neurodebian.sources.list
-	apt-key adv --recv-keys --keyserver pool.sks-keyservers.net 2649A5A9 || { wget -q -O- http://neuro.debian.net/_static/neuro.debian.net.asc | apt-key add -; }
-	apt-get update
-	apt-get -y install git
-	apt-get -y install build-essential
-	apt-get -y install zlib1g-dev
-	apt-get -y install python-pip
-	apt-get -y install python-dev
-	apt-get -y install g++
-	apt-get -y install gcc
-	apt-get -y install unzip
+	export LC_CTYPE="en_US.utf8"
+	export LC_ALL="en_US.utf8"
+	export LANG="en_US.utf8"
+	export LANGUAGE="en_US.utf8"
+	rm -rf /var/lib/apt/lists/*
+	rm -rf /var/cache/apt/*.bin
+	apt update
+	apt -y install python3-pip
+	apt -y install python3-dev
+	apt -y install unzip
+	apt -y install python3
+	apt -y install python3-tk
 
 	cd /
-	wget https://github.com/Kitware/CMake/releases/download/v3.13.2/cmake-3.13.2.tar.gz
-	tar -xvzf cmake-3.13.2.tar.gz
-	rm -rf cmake-3.13.2.tar.gz
-	cd cmake-3.13.2
-	./bootstrap
-	make -j 8
-	make install
-	cd /
-
-	apt-get -y install python
-	apt-get -y install libeigen3-dev
-	apt-get -y install libqt4-opengl-dev
-	apt-get -y install libgl1-mesa-dev
-	apt-get -y install libfftw3-dev
-	apt-get -y install libtiff5-dev
-	apt-get -y install clang
-	apt-get -y install libblas-dev liblapack-dev
-	apt-get -y install fsl-5.0=5.0.9-5~nd16.04+1
-	apt-get -y install fsl-5.0-eddy-nonfree=5.0.9-1~nd16.04+1
-	apt-get -y install python-tk
-	pip install scipy==1.2.2
-	pip install h5py==2.6.0
-	pip install setuptools==38.5.1
-	pip install nibabel==2.3.0
-	pip install pybids==0.9.1
-
-	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.11/centos6/eddy_openmp
-	chmod +x eddy_openmp
-	mv eddy_openmp /usr/share/fsl/5.0/bin/eddy_openmp
-
-	wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
-	dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
-	apt-get update
-	apt-get -y install cuda-runtime-8-0
-
-	wget https://fsl.fmrib.ox.ac.uk/fsldownloads/patches/eddy-patch-fsl-5.0.11/centos6/eddy_cuda8.0
-	chmod +x eddy_cuda8.0
-	mv eddy_cuda8.0 /usr/share/fsl/5.0/bin/eddy_cuda
-
-	cd /
-	mkdir ants_build
-	git clone https://github.com/ANTsX/ANTs.git
-	cd ANTs
-	git fetch --tags
-	git checkout tags/v2.3.1 -b v2.3.1
-	cd ../ants_build
-	cmake ../ANTs
-	make -j 8
-	cp ../ANTs/Scripts/*.sh bin/
-
-	cd /
-	git clone https://github.com/MRtrix3/mrtrix3.git
-	cd mrtrix3
-	git fetch --tags
-	git checkout tags/3.0_RC3 -b 3.0_RC3
-	./configure
-	./build
-
-	cd /
-	wget https://github.com/scilus/scilpy/archive/a8e9fb5.zip
-	unzip a8e9fb5.zip
-	mv scilpy-a8e9fb5 scilpy
+	wget https://github.com/scilus/scilpy/archive/4e24fe5.zip
+	unzip 4e24fe5.zip
+	mv scilpy-4e24fe5 scilpy
 	cd /scilpy
-	pip install -r requirements.txt
-	python setup.py install
-	python setup.py install_scripts
+	pip3 install -r requirements.txt
+	pip3 install setuptools==40.2.0
+	python3 setup.py install
+	python3 setup.py install_scripts
 
 	# Doing them here since Amico depends on Dipy.
-	pip install --index-url https://test.pypi.org/simple/ spams==2.6.1.11
-	pip install https://github.com/jchoude/AMICO/archive/NF_better_fw_correction.zip
+	pip3 install --index-url https://test.pypi.org/simple/ spams==2.6.1.11
+	pip3 install https://github.com/daducci/AMICO/archive/d345bba.zip
 
-	sed -i '41s/.*/backend : Agg/' /usr/local/lib/python2.7/dist-packages/matplotlib/mpl-data/matplotlibrc
-
+	sed -i '41s/.*/backend : Agg/' /usr/local/lib/python3.5/dist-packages/matplotlib/mpl-data/matplotlibrc

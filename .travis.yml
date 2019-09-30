@@ -16,4 +16,4 @@ before_install:
 script:
   - travis_wait 60 sudo singularity build singularity_tractoflow.img singularity_tractoflow.def
   - singularity exec singularity_tractoflow.img echo "Singularity test"
-  - travis_wait 30 ./gdrive update -c gdrive-config $SINGULARITY_ID singularity_tractoflow.img --name singularity_tractoflow_${TRAVIS_COMMIT}.img
+  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait 30 ./gdrive update -c gdrive-config $SINGULARITY_ID singularity_tractoflow.img --name singularity_tractoflow_${TRAVIS_COMMIT}.img; fi'
