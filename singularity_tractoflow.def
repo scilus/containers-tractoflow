@@ -25,9 +25,9 @@ From: scilus/singularity-base-tractoflow:latest
 	apt -y install python3-tk
 
 	cd /
-	wget https://github.com/scilus/scilpy/archive/4e24fe5.zip
-	unzip 4e24fe5.zip
-	mv scilpy-4e24fe5 scilpy
+	wget https://github.com/scilus/scilpy/archive/ad54301.zip
+	unzip ad54301.zip
+	mv scilpy-ad54301 scilpy
 	cd /scilpy
 	pip3 install -r requirements.txt
 	pip3 install setuptools==40.2.0
