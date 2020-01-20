@@ -25,17 +25,13 @@ From: scilus/singularity-base-tractoflow:latest
 	apt -y install python3-tk
 
 	cd /
-	wget https://github.com/scilus/scilpy/archive/ad54301.zip
-	unzip ad54301.zip
-	mv scilpy-ad54301 scilpy
+	wget https://github.com/scilus/scilpy/archive/638769d.zip
+	unzip 638769d.zip
+	mv scilpy-638769d scilpy
 	cd /scilpy
 	pip3 install -r requirements.txt
 	pip3 install setuptools==40.2.0
 	python3 setup.py install
 	python3 setup.py install_scripts
-
-	# Doing them here since Amico depends on Dipy.
-	pip3 install --index-url https://test.pypi.org/simple/ spams==2.6.1.11
-	pip3 install https://github.com/daducci/AMICO/archive/d345bba.zip
 
 	sed -i '41s/.*/backend : Agg/' /usr/local/lib/python3.5/dist-packages/matplotlib/mpl-data/matplotlibrc
