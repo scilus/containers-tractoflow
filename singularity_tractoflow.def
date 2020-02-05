@@ -2,7 +2,7 @@ BootStrap: docker
 From: scilus/singularity-base-tractoflow:latest
 
 %environment
-	export MATPLOTLIBRC="/usr/local/lib/python3.5/dist-packages/matplotlib/mpl-data/"
+	export MATPLOTLIBRC="/usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/"
 
 %setup
 	export HUMAN_DATA=human-data_master_1d3abfb.tar.bz2
