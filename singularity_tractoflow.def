@@ -33,9 +33,9 @@ From: scilus/singularity-base-tractoflow:latest
 	apt -y install python3.7-tk
 
 	cd /
-	wget https://github.com/scilus/scilpy/archive/638769d.zip
-	unzip 638769d.zip
-	mv scilpy-638769d scilpy
+	wget https://github.com/scilus/scilpy/archive/24f8aaf.zip
+	unzip 24f8aaf.zip
+	mv scilpy-24f8aaf scilpy
 	cd /scilpy
 	pip3 install bz2file==0.98
     pip3 install cycler==0.10.0
