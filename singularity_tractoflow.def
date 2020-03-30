@@ -62,3 +62,21 @@ From: scilus/singularity-base-tractoflow:latest
 	python3 setup.py install_scripts
 
 	sed -i '41s/.*/backend : Agg/' /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/matplotlibrc
+
+	pip3 install --index-url https://test.pypi.org/simple/ spams
+
+	cd /
+	wget https://github.com/daducci/AMICO/archive/master.zip
+	unzip master.zip
+	rm master.zip
+	mv AMICO-master amico
+	cd /amico
+	pip3 install .
+
+	cd /
+	wget https://github.com/daducci/COMMIT/archive/master.zip
+	unzip master.zip
+	rm master.zip
+	mv COMMIT-master commit
+	cd /commit
+	pip3 install .
