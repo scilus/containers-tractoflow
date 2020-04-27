@@ -13,7 +13,18 @@ before_install:
   - mkdir gdrive-config
   - echo $GOOGLE_KEY > gdrive-config/token_v2.json
 
-script:
-  - travis_wait 60 sudo singularity build singularity_tractoflow.img singularity_tractoflow.def
-  - singularity exec singularity_tractoflow.img echo "Singularity test"
-  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait 30 ./gdrive update -c gdrive-config $SINGULARITY_ID singularity_tractoflow.img --name singularity_tractoflow_${TRAVIS_COMMIT}.img; fi'
+jobs:
+  include:
+    - stage: build Docker image
+      script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - travis_wait 60 docker build -t docker_tractoflow .
+        - docker images
+        - docker tag docker_tractoflow $DOCKER_USERNAME/docker_tractoflow:latest
+        - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait 60 docker push $DOCKER_USERNAME/docker_tractoflow:latest; fi'
+    - stage: build Singularity image
+      if: type = pull_request
+      script:
+        - travis_wait 60 sudo singularity build singularity_tractoflow.img singularity_tractoflow.def
+        - singularity exec singularity_tractoflow.img echo "Singularity test"
+        - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait 30 ./gdrive update -c gdrive-config $SINGULARITY_ID singularity_tractoflow.img --name singularity_tractoflow_${TRAVIS_COMMIT}.img; fi'
