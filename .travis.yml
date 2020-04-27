@@ -15,10 +15,10 @@ jobs:
   include:
     - stage: build Docker image
       script:
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - travis_wait 60 docker build -t docker_tractoflow .
         - docker images
-        - docker tag docker_tractoflow $DOCKER_USERNAME/docker_tractoflow:latest
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; fi'
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]; then docker tag docker_tractoflow $DOCKER_USERNAME/docker_tractoflow:latest; fi'
         - 'if [ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]; then travis_wait 60 docker push $DOCKER_USERNAME/docker_tractoflow:latest; fi'
     - stage: build Singularity image
       if: branch = master AND type = push
