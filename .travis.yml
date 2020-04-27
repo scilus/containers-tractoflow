@@ -19,10 +19,10 @@ jobs:
         - travis_wait 60 docker build -t docker_tractoflow .
         - docker images
         - docker tag docker_tractoflow $DOCKER_USERNAME/docker_tractoflow:latest
-        - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait 60 docker push $DOCKER_USERNAME/docker_tractoflow:latest; fi'
+        - 'if [[ "$TRAVIS_PULL_REQUEST" = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]]; then travis_wait 60 docker push $DOCKER_USERNAME/docker_tractoflow:latest; fi'
     - stage: build Singularity image
-      if: type = pull_request
+      if: branch = master AND type = push
       script:
         - travis_wait 60 sudo singularity build singularity_tractoflow.img singularity_tractoflow.def
         - singularity exec singularity_tractoflow.img echo "Singularity test"
-        - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then travis_wait 30 ./gdrive update -c gdrive-config $SINGULARITY_ID singularity_tractoflow.img --name singularity_tractoflow_${TRAVIS_COMMIT}.img; fi'
+        - travis_wait 30 ./gdrive update -c gdrive-config $SINGULARITY_ID singularity_tractoflow.img --name singularity_tractoflow_${TRAVIS_COMMIT}.img
