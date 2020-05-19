@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/scilus/singularity-tractoflow.svg?branch=master)](https://travis-ci.org/scilus/singularity-tractoflow)
+[![Build Status](https://travis-ci.org/scilus/containers-tractoflow.svg?branch=master)](https://travis-ci.org/scilus/containers-tractoflow)
 
 Singularity related files for TractoFlow
 ----------------------------------------
