@@ -16,7 +16,13 @@ RUN rm -rf /var/cache/apt/*.bin
 RUN apt update
 RUN apt -y install software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
+RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt update
+
+RUN apt -y install openjdk-11-jdk curl
+WORKDIR /
+RUN wget https://github.com/nextflow-io/nextflow/releases/download/v19.04.0/nextflow-19.04.0-all && mv nextflow-19.04.0-all nextflow && chmod +x nextflow
+ENV PATH="/:${PATH}"
 RUN apt -y install python3-pip
 RUN apt -y install python3.7
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
