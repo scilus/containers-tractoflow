@@ -17,9 +17,9 @@ jobs:
       script:
         - travis_wait 60 docker build -t docker_tractoflow .
         - docker images
-        - 'if [[ "$TRAVIS_PULL_REQUEST" == "true"]]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; fi'
-        - 'if [[ "$TRAVIS_PULL_REQUEST" == "true"]]; then docker tag docker_tractoflow $DOCKER_USERNAME/docker-tractoflow:testing; fi'
-        - 'if [[ "$TRAVIS_PULL_REQUEST" == "true"]]; then travis_wait 60 docker push $DOCKER_USERNAME/docker-tractoflow:testing; fi'
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "true"]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; fi'
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "true"]; then docker tag docker_tractoflow $DOCKER_USERNAME/docker-tractoflow:testing; fi'
+        - 'if [ "$TRAVIS_PULL_REQUEST" == "true"]; then travis_wait 60 docker push $DOCKER_USERNAME/docker-tractoflow:testing; fi'
         - 'if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; fi'
         - 'if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then docker tag docker_tractoflow $DOCKER_USERNAME/docker-tractoflow:latest; fi'
         - 'if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then travis_wait 60 docker push $DOCKER_USERNAME/docker-tractoflow:latest; fi'
