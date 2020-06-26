@@ -1,19 +1,32 @@
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/scilus/containers-tractoflow)](https://github.com/scilus/containers-tractoflow/releases)
 [![Build Status](https://travis-ci.org/scilus/containers-tractoflow.svg?branch=master)](https://travis-ci.org/scilus/containers-tractoflow)
 
-Singularity related files for TractoFlow
-----------------------------------------
+Containers related files for TractoFlow
+=======================================
 
-The image for singularity can be built using `singularity_tractoflow.def` with the command:
+Containers update
+-----------------
+When updating `Scilpy`, you will need to modify the SHA of the file, as well as
+the `SCILPY_VERSION` variable in `Dockerfile`.
+
+When updating `TractoFlow`, you will need to modify the SHA of the file, as well as
+the `TRACTOFLOW_VERSION` variable in `Dockerfile`.
+
+Docker
+------
+To build the docker use the following command:
+
+`sudo docker build -t docker_tractoflow .`
+
+Singularity
+-----------
+The image for Singularity can be built using `singularity_tractoflow.def` with the command:
 `sudo singularity build image_name.img singularity_tractoflow.def`.
+
+Singularity container is built from the Docker stored on dockerhub.
 
 It can be used to run the TractoFlow pipeline with the option
 `-with-singularity image_name.img` of Nextflow.
-
-When updating `Scilpy`, you will need to modify the SHA of the file, as well as
-the `SCILPY` variable in `singularity_tractoflow.def`.
-
-To build the singularity, please run the command from the directory `singularity-tractoflow`.
-Otherwise, `Scilpy` archive will not be found.
 
 If you use this singularity, please cite:
 
