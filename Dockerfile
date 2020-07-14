@@ -81,7 +81,7 @@ RUN python3 setup.py install_scripts
 RUN sed -i '41s/.*/backend : Agg/' /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/matplotlibrc
 
 WORKDIR /
-ENV TRACTOFLOW_VERSION="c91403c"
+ENV TRACTOFLOW_VERSION="99183f2"
 RUN wget https://github.com/scilus/tractoflow/archive/${TRACTOFLOW_VERSION}.zip
 RUN unzip ${TRACTOFLOW_VERSION}.zip
 RUN mv tractoflow-${TRACTOFLOW_VERSION} tractoflow
