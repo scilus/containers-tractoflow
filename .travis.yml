@@ -5,11 +5,6 @@ before_install:
   - sudo apt-key adv --recv-keys --keyserver pool.sks-keyservers.net 2649A5A9 || { sudo wget -q -O- http://neuro.debian.net/_static/neuro.debian.net.asc | sudo apt-key add -; }
   - sudo apt-get update
   - sudo apt-get install -y singularity-container
-  - wget https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64
-  - mv gdrive-linux-x64 gdrive
-  - chmod +x gdrive
-  - mkdir gdrive-config
-  - echo $GOOGLE_KEY > gdrive-config/token_v2.json
 
 jobs:
   include:
@@ -20,9 +15,3 @@ jobs:
         - 'if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; fi'
         - 'if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then docker tag docker_tractoflow $DOCKER_USERNAME/docker-tractoflow:latest; fi'
         - 'if [[ "$TRAVIS_PULL_REQUEST" == "false" && "$TRAVIS_BRANCH" == "master" ]]; then travis_wait 60 docker push $DOCKER_USERNAME/docker-tractoflow:latest; fi'
-    - stage: build Singularity image
-      if: branch = master AND type = push
-      script:
-        - travis_wait 60 sudo singularity build singularity_tractoflow.img singularity_tractoflow.def
-        - singularity exec singularity_tractoflow.img echo "Singularity test"
-        - travis_wait 30 ./gdrive update -c gdrive-config $SINGULARITY_ID singularity_tractoflow.img --name singularity_tractoflow_${TRAVIS_COMMIT}.img
