@@ -19,9 +19,7 @@ RUN add-apt-repository ppa:deadsnakes/ppa
 RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt update
 
-RUN apt -y install openjdk-11-jdk curl
 WORKDIR /
-RUN wget https://github.com/nextflow-io/nextflow/releases/download/v19.04.0/nextflow-19.04.0-all && mv nextflow-19.04.0-all nextflow && chmod +x nextflow
 ENV PATH="/:${PATH}"
 RUN apt -y install python3-pip
 RUN apt -y install python3.7
@@ -35,7 +33,7 @@ RUN apt -y install unzip
 RUN apt -y install python3.7-tk
 
 WORKDIR /
-ENV SCILPY_VERSION="d05fa6e"
+ENV SCILPY_VERSION="1.1.0"
 RUN wget https://github.com/scilus/scilpy/archive/${SCILPY_VERSION}.zip
 RUN unzip ${SCILPY_VERSION}.zip
 RUN mv scilpy-${SCILPY_VERSION} scilpy
@@ -79,11 +77,5 @@ RUN python3 setup.py install
 RUN python3 setup.py install_scripts
 
 RUN sed -i '41s/.*/backend : Agg/' /usr/local/lib/python3.7/dist-packages/matplotlib/mpl-data/matplotlibrc
-
-WORKDIR /
-ENV TRACTOFLOW_VERSION="99183f2"
-RUN wget https://github.com/scilus/tractoflow/archive/${TRACTOFLOW_VERSION}.zip
-RUN unzip ${TRACTOFLOW_VERSION}.zip
-RUN mv tractoflow-${TRACTOFLOW_VERSION} tractoflow
 
 WORKDIR /
